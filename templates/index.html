@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ALS Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ALS Voice Analysis</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="sex">Sex (M/F):</label>
+                <input type="text" name="sex" id="sex" required maxlength="1">
+            </div>
+            
+            <div class="file-inputs">
+                {% for label in labels %}
+                <div class="form-group">
+                    <label for="file_{{ label }}">Upload {{ label }} phonation:</label>
+                    <input type="file" name="file_{{ label }}" id="file_{{ label }}" accept=".wav" required>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="submit-btn">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
